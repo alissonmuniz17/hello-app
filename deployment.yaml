@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-app
-  labels:
-    app: hello-app
 spec:
   replicas: 1   # Quantos pods queremos rodando
   selector:
@@ -15,7 +13,9 @@ spec:
         app: hello-app
     spec:
       containers:
-      - name: hello-container
-        image: nginxdemos/hello  # A imagem container
+      - name: hello-app
+        image: hashicorp/http-echo  # A imagem container
+        args: 
+        - "-text=Hello, Kubernetes com ArgoCD!"
         ports:
-        - containerPort: 80      # Porta que o container escuta
+        - containerPort: 5678      # Porta que o container escuta
